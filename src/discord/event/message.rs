@@ -6,7 +6,7 @@ impl Handler {
         if msg.is_own(&ctx.cache) {
             return; // Dont respond to own messages
         }
-        dbg!(msg.kind);
+        
         if msg.kind != MessageType::Regular &&
             msg.kind != MessageType::InlineReply {
             return; // Only reply to normal messages and replys

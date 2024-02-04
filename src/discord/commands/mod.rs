@@ -4,6 +4,7 @@ use crate::util::config::Config;
 use clap::Parser;
 
 mod ping;
+mod ban;
 
 
 macro_rules! run_cmd {
@@ -21,6 +22,7 @@ macro_rules! run_cmd {
 pub async fn command_handler(cfg: &Config, ctx: &Context, msg: &Message, args: Vec<String>) -> Result<()> {
     let res = match args[0].as_str() {
         "ping" => run_cmd!(cfg, ctx, msg, args, ping),
+        "ban" => run_cmd!(cfg, ctx, msg, args, ban),
 
         _ => bail!("Unknown command {}", args.join(" ").escape_debug())
     };
