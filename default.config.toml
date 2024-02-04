@@ -1,0 +1,3 @@
+[discord] # all the configs for the discord part of the bot
+token = "" # Put your token here
+prefix = ":3" # the prefix that every command begins with
