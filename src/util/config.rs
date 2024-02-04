@@ -1,20 +1,40 @@
 use serde::Deserialize;
 use anyhow::{bail, Result};
+use serenity::all::{EmojiId, ReactionType};
 
 const DEF_CFG: &'static str = include_str!("../../default.config.toml");
 const CFG_PTH: &'static str = "./config.toml";
 
 
-#[derive(Deserialize, Clone)]
+#[derive(Deserialize, Clone, Default)]
 pub struct Config {
-    pub discord: ConfigDiscord
+    pub discord: ConfigDiscord,
+}
+
+#[derive(Deserialize, Clone, Default)]
+pub struct ConfigDiscord {
+    pub token: String,
+    pub prefix: String,
+    pub admin_role: u64,
+    pub mod_role: u64,
+    pub autoreply: Vec<ConfigAutoreply>,
+    pub autoreact: Vec<ConfigAutoreact>
 }
 
 #[derive(Deserialize, Clone)]
-pub struct ConfigDiscord {
-    pub token: String,
-    pub prefix: String,  
+pub struct ConfigAutoreply {
+    pub trigger: String,
+    pub reply: String
 }
+
+#[derive(Deserialize, Clone)]
+pub struct ConfigAutoreact {
+    pub trigger: Vec<String>,
+    pub name: Option<String>,
+    pub id: String,
+    pub animated: bool
+}
+
 
 impl Config {
     pub fn parse() -> Result<Self> {
@@ -39,5 +59,11 @@ impl Config {
                 bail!("bad cfg file");
             },
         }
+    }
+}
+
+impl ConfigAutoreact {
+    pub fn to_custom_reaction(&self) -> ReactionType {
+        ReactionType::Custom { animated: self.animated, id: EmojiId::new(self.id.parse().expect("Invalid emoji id")), name: self.name.clone() }
     }
 }

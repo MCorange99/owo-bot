@@ -1,4 +1,6 @@
 use serenity::all::*;
+use crate::discord::features;
+
 use super::Handler;
 
 impl Handler {
@@ -6,7 +8,7 @@ impl Handler {
         if msg.is_own(&ctx.cache) {
             return; // Dont respond to own messages
         }
-        
+
         if msg.kind != MessageType::Regular &&
             msg.kind != MessageType::InlineReply {
             return; // Only reply to normal messages and replys
@@ -27,7 +29,7 @@ impl Handler {
             };
 
 
-            match crate::discord::commands::command_handler(&self.config, &ctx, &msg, args).await {
+            match crate::discord::commands::command_handler(&self.config, &self.commands, &ctx, &msg, args).await {
                 Ok(_) => (),
                 Err(e) => {
                     let _ = msg.reply_ping(&ctx.http, format!("{e}"));
@@ -35,5 +37,8 @@ impl Handler {
             }
 
         }
+
+        features::message_reply::autoreply(&self.config, &ctx, &msg).await;
+        features::message_reply::autoreact(&self.config, &ctx, &msg).await;
     }
 }

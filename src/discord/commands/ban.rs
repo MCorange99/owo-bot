@@ -1,11 +1,17 @@
-use std::str::FromStr;
 
 use clap::Parser;
-use humantime::Duration;
+// use humantime::Duration;
 use serenity::all::*;
-use anyhow::{bail, Result};
+use anyhow::Result;
 use crate::{msg_reply, util::config::Config};
 
+use super::{CommandInfo, CommandPerms};
+
+pub const INFO: CommandInfo = CommandInfo {
+    name: "ban",
+    usage: "ban -u @somecunt -r 'He was being dumb' -d 7",
+    permissions: CommandPerms::MOD,
+};
 
 ///
 /// Ban users for a specified amount of time

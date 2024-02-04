@@ -25,11 +25,11 @@ async fn main() {
     }
     env_logger::init();
 
-    let cfg = check_res!(
+    let mut cfg = check_res!(
         util::config::Config::parse()
     );
 
     let _client = check_res!(
-        discord::DiscordClient::new(&cfg).await
+        discord::DiscordClient::new(&mut cfg).await
     );
 }

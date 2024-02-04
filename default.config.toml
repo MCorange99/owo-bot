@@ -1,3 +1,15 @@
 [discord] # all the configs for the discord part of the bot
 token = "" # Put your token here
 prefix = ":3" # the prefix that every command begins with
+admin_role = ""
+mod_role = ""
+
+[[discord.autoreply]]
+trigger="owo"
+reply="nuh uh"
+
+[[discord.autoreact]]
+trigger=["fuck"]
+name="eyessus"
+id="799911512487624716"
+animated=false

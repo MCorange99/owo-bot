@@ -1,5 +1,6 @@
 pub mod event;
 pub mod commands;
+pub mod features;
 
 use serenity::{all::GatewayIntents, Client};
 use anyhow::{bail, Result};

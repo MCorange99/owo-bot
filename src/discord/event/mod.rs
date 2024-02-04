@@ -2,18 +2,20 @@ mod ready;
 mod message;
 
 use serenity::all::*;
-
 use crate::util::config::Config;
 
+use super::commands::CommandInfo;
 
 pub struct Handler {
-    config: Config
+    pub commands: Box<Vec<CommandInfo>>,
+    pub config: Config
 }
 
 
 impl Handler {
     pub fn new(config: &Config) -> Self {
         Self {
+            commands: Box::new(Vec::new()),
             config: config.clone()
         }
     }
@@ -91,7 +93,7 @@ impl RawEventHandler for Handler {
             Event::Ready(e) => {
                 self.ready(ctx, e.ready).await;
             }
-            e  => log::warn!("Unknown event: {e:?}"),
+            e  => log::debug!("Unknown event: {e:?}"),
         }
         
     }
