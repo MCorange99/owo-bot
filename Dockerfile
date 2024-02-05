@@ -84,4 +84,4 @@ COPY --from=build /bin/server /app/server
 EXPOSE 8989
 
 # What the container should run when it is started.
-CMD ["/bin/server"]
+CMD ["/app/server"]
