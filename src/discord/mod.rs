@@ -20,6 +20,7 @@ impl DiscordClient {
             GatewayIntents::all()
         )
             .raw_event_handler(event::Handler::new(&cfg))
+            
             .await;
 
         let mut client = match client {
@@ -31,7 +32,7 @@ impl DiscordClient {
             }
         };
 
-        if let Err(e) = client.start().await {
+        if let Err(e) = client.start_autosharded().await {
             log::error!("Failed to start client");
             log::debug!("{e}");
             bail!("failed to log in")

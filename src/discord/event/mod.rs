@@ -93,7 +93,8 @@ impl RawEventHandler for Handler {
             Event::Ready(e) => {
                 self.ready(ctx, e.ready).await;
             }
-            e  => log::debug!("Unknown event: {e:?}"),
+            Event::Unknown(e)  => log::debug!("Unknown event: {:?} {:?}", e.kind, e.value),
+            e => log::debug!("Very unknown event {e:?}")
         }
         
     }

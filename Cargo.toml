@@ -15,7 +15,7 @@ humantime = "2.1.0"
 lazy_static = "1.4.0"
 log = "0.4.20"
 serde = { version = "1.0.196", features = ["derive"] }
-serenity = { version = "0.12", features = ["cache"] }
+serenity = { version = "0.12", features = ["cache", "gateway"] }
 shellish_parse = "2.2.0"
 tokio = { version = "1.21.2", features = ["macros", "rt-multi-thread"] }
 toml = "0.8.9"
