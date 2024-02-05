@@ -83,5 +83,6 @@ COPY --from=build /bin/server /app/server
 # Expose the port that the application listens on.
 EXPOSE 8989
 WORKDIR /app
+ENV RUST_LOG="owo_bot=debug"
 # What the container should run when it is started.
 CMD ["/app/server"]
