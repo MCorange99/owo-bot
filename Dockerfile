@@ -82,6 +82,6 @@ COPY --from=build /bin/server /app/server
 
 # Expose the port that the application listens on.
 EXPOSE 8989
-
+WORKDIR /app
 # What the container should run when it is started.
 CMD ["/app/server"]
