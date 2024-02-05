@@ -1,0 +1,21 @@
+#!!!!!!!!!!!
+#! Replies
+#!!!!!!!!!!!
+
+[[reply]]
+trigger_rx="owo|uwu"
+response="^^"
+
+[[reply]]
+trigger_rx="nu[h]*[\\s]*uh"
+response="<:nuhuh:1203758514233942096>"
+
+#!!!!!!!!!!!
+#! Reactions
+#!!!!!!!!!!!
+
+[[react]]
+trigger="fuck"
+name="eyessus"
+id="1203694247035932742"
+animated=false

@@ -14,8 +14,8 @@ impl Handler {
             return; // Only reply to normal messages and replys
         }
 
-        if msg.content.starts_with(&self.config.discord.prefix) {
-            let Some(txt) = msg.content.strip_prefix(&self.config.discord.prefix) else {
+        if msg.content.starts_with(&self.config.main.discord.prefix) {
+            let Some(txt) = msg.content.strip_prefix(&self.config.main.discord.prefix) else {
                 log::debug!("Failed to strip prefix from message {:?}", msg.content);
                 return;
             };
@@ -38,7 +38,7 @@ impl Handler {
 
         }
 
-        features::message_reply::autoreply(&self.config, &ctx, &msg).await;
-        features::message_reply::autoreact(&self.config, &ctx, &msg).await;
+        features::autoresponder::autoreply(&self.config, &ctx, &msg).await;
+        features::autoresponder::autoreact(&self.config, &ctx, &msg).await;
     }
 }

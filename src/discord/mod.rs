@@ -16,7 +16,7 @@ impl DiscordClient {
     pub async fn new(cfg: &Config) -> Result<Self> {
 
         let client = serenity::Client::builder(
-            &cfg.discord.token, 
+            &cfg.main.discord.token, 
             GatewayIntents::all()
         )
             .raw_event_handler(event::Handler::new(&cfg))

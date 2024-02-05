@@ -72,8 +72,8 @@ async fn check_perms(cfg: &Config, commands: &Box<Vec<CommandInfo>>, ctx: &Conte
 
     let perm_names = perms.iter_names().map(|f| f.0.to_string()).collect::<Vec<String>>().join(" ");
 
-    let has_admin_role = msg.author.has_role(&ctx.http, msg.guild_id.unwrap(), cfg.discord.admin_role).await.unwrap_or(false);
-    let has_mod_role = msg.author.has_role(&ctx.http, msg.guild_id.unwrap(), cfg.discord.mod_role).await.unwrap_or(false);
+    let has_admin_role = msg.author.has_role(&ctx.http, msg.guild_id.unwrap(), cfg.main.discord.admin_role).await.unwrap_or(false);
+    let has_mod_role = msg.author.has_role(&ctx.http, msg.guild_id.unwrap(), cfg.main.discord.mod_role).await.unwrap_or(false);
 
     match perms {
         p if p.contains(CommandPerms::ADMIN) && has_admin_role => true,

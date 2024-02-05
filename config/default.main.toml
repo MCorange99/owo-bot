@@ -4,12 +4,6 @@ prefix = ":3" # the prefix that every command begins with
 admin_role = ""
 mod_role = ""
 
-[[discord.autoreply]]
-trigger="owo"
-reply="nuh uh"
-
-[[discord.autoreact]]
-trigger=["fuck"]
-name="eyessus"
-id="799911512487624716"
-animated=false
+[database]
+name="owo_bot_db"
+password="" # make sure this is the same as in config/db-passwd.txt (this is for docker)

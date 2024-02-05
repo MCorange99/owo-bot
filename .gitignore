@@ -1,2 +1,4 @@
 /target
-**/config.toml
+/config/**/*
+!/config/**/default.*
+/.env

@@ -27,3 +27,16 @@ macro_rules! add_cmd {
         $list.push($p::INFO);
     };
 }
+
+#[macro_export]
+macro_rules! check_res {
+    ($e:expr) => {
+        match $e {
+            Ok(r) => r,
+            Err(e) => {
+                log::debug!("{e}");
+                return;
+            }
+        }
+    };
+}
