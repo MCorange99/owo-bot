@@ -5,5 +5,7 @@ admin_role = ""
 mod_role = ""
 
 [database]
-name="owo_bot_db"
+host="0.0.0.0"
+db_name="owo_bot_db"
+username="postgres"
 password="" # make sure this is the same as in config/db-passwd.txt (this is for docker)
