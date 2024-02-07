@@ -1,17 +1,12 @@
-use std::borrow::BorrowMut;
-
-use serenity::client::Context;
-
-use crate::database::{self, DatabaseContainer};
+// use serenity::client::Context;
 
 
-
-pub async fn on_reload(ctx: &Context) -> anyhow::Result<()> {
+// pub async fn on_reload(ctx: &Context) -> anyhow::Result<()> {
     
-    {
-        // ctx.data.write().await.entry::<DatabaseContainer>().and_modify(|db| {
-        //     database::actions::users::create_user(&mut db, uid)?;
-        // });
-    }
-    Ok(())
-}
+//     {
+//         // ctx.data.write().await.entry::<DatabaseContainer>().and_modify(|db| {
+//         //     database::actions::users::create_user(&mut db, uid)?;
+//         // });
+//     }
+//     Ok(())
+// }

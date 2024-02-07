@@ -1,7 +1,7 @@
 use clap::Parser;
 use serenity::all::*;
 use anyhow::Result;
-use crate::{discord::features::on_reload::on_reload, util::config::Config};
+use crate::util::config::Config;
 
 use super::{CommandInfo, CommandPerms};
 

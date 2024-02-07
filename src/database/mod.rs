@@ -1,7 +1,6 @@
-use std::sync::{Arc, Mutex};
 
 use anyhow::{bail, Result};
-use diesel::{r2d2::{ConnectionManager, Pool}, Connection, PgConnection};
+use diesel::{r2d2::{ConnectionManager, Pool}, PgConnection};
 use serenity::prelude::TypeMapKey;
 
 use crate::util::config::Config;

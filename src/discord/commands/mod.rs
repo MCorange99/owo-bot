@@ -1,13 +1,12 @@
-use std::{default, sync::RwLock};
+use std::sync::RwLock;
 
 use bitflags::bitflags;
 use lazy_static::lazy_static;
 use serenity::{all::Message, client::Context};
 use anyhow::{bail, Result};
-use crate::{add_cmd, msg_reply, run_cmd, util::config::Config};
+use crate::{msg_reply, run_cmd, util::config::Config};
 use clap::Parser;
 
-use super::event::Handler;
 
 mod ping;
 mod ban;
@@ -29,7 +28,7 @@ bitflags! {
 }
 
 
-
+#[allow(dead_code)]
 pub struct CommandInfo {
     name: &'static str,
     usage: &'static str,
