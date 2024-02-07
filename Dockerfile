@@ -24,7 +24,7 @@ WORKDIR /app
 COPY --from=xx / /
 
 # Install host build dependencies.
-RUN apk add --no-cache clang lld musl-dev git file
+RUN apk add --no-cache clang lld musl-dev git file libpq
 
 # This is the architecture you’re building for, which is passed in by the builder.
 # Placing it here allows the previous steps to be cached across architectures.
@@ -50,7 +50,7 @@ RUN --mount=type=bind,source=src,target=src \
     --mount=type=cache,target=/usr/local/cargo/registry/ \
 xx-cargo build --locked --release --target-dir ./target && \
 cp ./target/$(xx-cargo --print-target-triple)/release/$APP_NAME /bin/server && \
-xx-verify /bin/server
+xx-verify /bin/serverw
 
 ################################################################################
 # Create a new stage for running the application that contains the minimal

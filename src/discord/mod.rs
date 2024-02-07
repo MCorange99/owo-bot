@@ -5,7 +5,7 @@ pub mod features;
 use serenity::{all::GatewayIntents, Client};
 use anyhow::{bail, Result};
 
-use crate::util::config::Config;
+use crate::{database::{Database, DatabaseContainer}, util::config::Config};
 
 #[allow(dead_code)]
 pub struct DiscordClient {
@@ -13,8 +13,7 @@ pub struct DiscordClient {
 }
 
 impl DiscordClient {
-    pub async fn new(cfg: &Config) -> Result<Self> {
-
+    pub async fn new(db: &mut Database, cfg: &Config) -> Result<Self> {
         let client = serenity::Client::builder(
             &cfg.main.discord.token, 
             GatewayIntents::all()
@@ -22,7 +21,9 @@ impl DiscordClient {
             .raw_event_handler(event::Handler::new(&cfg))
             
             .await;
+        
 
+        
         let mut client = match client {
             Ok(c) => c,
             Err(e) => {
@@ -31,6 +32,9 @@ impl DiscordClient {
                 bail!("bad client")
             }
         };
+
+        client.data.write().await.insert::<DatabaseContainer>(db.clone());
+        
 
         if let Err(e) = client.start_autosharded().await {
             log::error!("Failed to start client");

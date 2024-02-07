@@ -13,9 +13,12 @@ async fn main() {
     let mut cfg = util::config::Config::new();
     check_res!(cfg.parse());
 
-    let db = check_res!(Database::connect(&cfg));
+    let mut db = check_res!(Database::connect(&cfg));
 
+    
+    
     let _client = check_res!(
-        discord::DiscordClient::new(&mut cfg).await
+        discord::DiscordClient::new(&mut db, &mut cfg).await
     );
+    
 }

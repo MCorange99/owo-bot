@@ -28,4 +28,4 @@ shellish_parse = "2.2.0"                                                  #? Par
 serenity = { version = "0.12", features = ["cache", "gateway"] }          #? Discord api
 
 #? db
-diesel = { version = "2.1.0", features = ["postgres"] }                   #? Postgres ORM
+diesel = { version = "2.1.0", features = ["postgres", "r2d2"] }                   #? Postgres ORM
