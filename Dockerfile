@@ -32,7 +32,7 @@ ARG TARGETPLATFORM
 
 # Install cross compilation build dependencies.
 RUN xx-apk add --no-cache musl-dev gcc postgresql-libs libpq
-run cp libs/libpq.so /lib/libpq.so
+run cp /app/libs/libpq.so /lib/libpq.so
 
 # Build the application.
 # Leverage a cache mount to /usr/local/cargo/registry/
