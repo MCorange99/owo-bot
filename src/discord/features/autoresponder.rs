@@ -1,5 +1,5 @@
 
-use std::{sync::RwLock, time::Duration};
+use std::sync::RwLock;
 
 use lazy_static::lazy_static;
 use regex::Regex;
@@ -7,16 +7,8 @@ use serenity::all::*;
 
 use crate::{msg_reply, util::config::Config};
 
-const RATE_LIMIT: u64 = 1000;
-
-lazy_static!(
-    static ref LAST_REPLY: RwLock<i64> = RwLock::new(0);
-);
 
 pub async fn autoreply(cfg: &Config, ctx: &Context, msg: &Message) {
-    if *LAST_REPLY.read().unwrap() + (Duration::from_millis(RATE_LIMIT).as_millis() as i64) < Timestamp::now().timestamp_millis() {
-        return;
-    }
 
     for ar in &cfg.autoresonder.reply {
         let txt = if ar.force_lowercase == Some(false) {
@@ -42,14 +34,9 @@ pub async fn autoreply(cfg: &Config, ctx: &Context, msg: &Message) {
             }
         }
     }
-    *LAST_REPLY.write().unwrap() = Timestamp::now().timestamp_millis()
 }
 
 pub async fn autoreact(cfg: &Config, ctx: &Context, msg: &Message) {   
-    if *LAST_REPLY.read().unwrap() + (Duration::from_millis(RATE_LIMIT).as_millis() as i64) < Timestamp::now().timestamp_millis() {
-        return;
-    }
-
 
     for ar in &cfg.autoresonder.react {
         let txt = if ar.force_lowercase == Some(false) {
@@ -79,5 +66,4 @@ pub async fn autoreact(cfg: &Config, ctx: &Context, msg: &Message) {
             }
         }
     }
-    *LAST_REPLY.write().unwrap() = Timestamp::now().timestamp_millis()
 }

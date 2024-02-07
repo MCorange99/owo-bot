@@ -23,7 +23,7 @@ impl TypeMapKey for DatabaseContainer {
 
 impl Database {
     pub fn connect(cfg: &Config) -> Result<Self> {
-
+        log::info!("Starting connection to databse at {} ", cfg.main.database.get_db_url_censored());
         let conn = Pool::new(ConnectionManager::<PgConnection>::new(&cfg.main.database.get_db_url()));
 
         let conn = match conn {
@@ -34,7 +34,7 @@ impl Database {
             },
         };
 
-        log::info!("Connected to {} database", cfg.main.database.get_db_url_censored());
+        log::info!("Connected to database");
 
         Ok(Self {
             connection: conn

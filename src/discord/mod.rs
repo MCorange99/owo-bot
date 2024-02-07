@@ -14,6 +14,7 @@ pub struct DiscordClient {
 
 impl DiscordClient {
     pub async fn new(db: &mut Database, cfg: &Config) -> Result<Self> {
+        log::info!("Connecting to discord");
         let client = serenity::Client::builder(
             &cfg.main.discord.token, 
             GatewayIntents::all()
