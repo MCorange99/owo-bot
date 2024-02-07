@@ -24,17 +24,17 @@ WORKDIR /app
 COPY --from=xx / /
 
 # Install host build dependencies.
-RUN apk add --no-cache clang lld musl-dev git file postgresql-libs libpq
+RUN apk add --no-cache clang lld musl-dev git file postgresql-libs libpq libpq-dev
 
 # This is the architecture you’re building for, which is passed in by the builder.
 # Placing it here allows the previous steps to be cached across architectures.
 ARG TARGETPLATFORM
 
 # Install cross compilation build dependencies.
-RUN xx-apk add --no-cache musl-dev gcc postgresql-libs libpq
+RUN xx-apk add --no-cache musl-dev gcc postgresql-libs libpq libpq-dev
 run pwd
 run ls
-run cp /app/libs/libpq.so /lib/libpq.so
+# run cp /app/libs/libpq.so /lib/libpq.so
 
 # Build the application.
 # Leverage a cache mount to /usr/local/cargo/registry/
