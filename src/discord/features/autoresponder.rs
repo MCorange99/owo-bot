@@ -53,7 +53,7 @@ impl Feature for Autoresponder {
 
 
         for ar in &cfg.autoresonder.reply {
-            let txt = if ar.keep_case == Some(false) || ar.keep_case == None{
+            let txt = if ar.keep_case == Some(false) || ar.keep_case.is_none(){
                 msg.content.to_ascii_lowercase()
             } else {
                 msg.content.clone()
@@ -66,7 +66,7 @@ impl Feature for Autoresponder {
                 }
             }
             if let Some(trigger) = &ar.trigger_rx {
-                let Ok(rx) = Regex::new(&trigger) else {
+                let Ok(rx) = Regex::new(trigger) else {
                     log::error!("Invalid regex {trigger:?}");
                     continue;
                 };
@@ -79,7 +79,7 @@ impl Feature for Autoresponder {
 
         
         for ar in &cfg.autoresonder.react {
-            let txt = if ar.keep_case == Some(false) || ar.keep_case == None{
+            let txt = if ar.keep_case == Some(false) || ar.keep_case.is_none(){
                 msg.content.to_ascii_lowercase()
             } else {
                 msg.content.clone()
@@ -94,7 +94,7 @@ impl Feature for Autoresponder {
                 }
             }
             if let Some(trigger) = &ar.trigger_rx {
-                let Ok(rx) = Regex::new(&trigger) else {
+                let Ok(rx) = Regex::new(trigger) else {
                     log::error!("Invalid regex {trigger:?}");
                     continue;
                 };

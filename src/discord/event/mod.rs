@@ -7,7 +7,7 @@ use crate::{log_if_err, util::config::Config};
 use super::{commands::CommandInfo, features::{autoresponder::Autoresponder, Feature, FeatureWraper}};
 
 pub struct Handler {
-    pub commands: Box<Vec<CommandInfo>>,
+    pub commands: Vec<CommandInfo>,
     pub config: Config,
     pub autoresponder: FeatureWraper<Autoresponder>
 }
@@ -16,7 +16,7 @@ pub struct Handler {
 impl Handler {
     pub fn new(config: &Config) -> Self {
         Self {
-            commands: Box::new(Vec::new()),
+            commands: Vec::new(),
             config: config.clone(),
             autoresponder: FeatureWraper::new(Autoresponder::default()),
         }

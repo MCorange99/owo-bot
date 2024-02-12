@@ -19,7 +19,7 @@ impl DiscordClient {
             &cfg.main.discord.token, 
             GatewayIntents::all()
         )
-            .raw_event_handler(event::Handler::new(&cfg))
+            .raw_event_handler(event::Handler::new(cfg))
             
             .await;
         

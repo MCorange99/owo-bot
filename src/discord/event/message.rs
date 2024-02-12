@@ -21,16 +21,16 @@ impl Handler {
             let args = match shellish_parse::parse(txt, true) {
                 Ok(r) => r,
                 Err(e) => {
-                    let _ = msg.reply_ping(&ctx.http, format!("Failed to parse command {txt:?}: {e}"));
+                    let _ = msg.reply_ping(&ctx.http, format!("Failed to parse command {txt:?}: {e}")).await;
                     return;
                 }
             };
 
 
-            match crate::discord::commands::command_handler(&self.config, &self.commands, &ctx, &msg, args).await {
+            match crate::discord::commands::command_handler(&self.config, &self.commands, &ctx, msg, args).await {
                 Ok(_) => (),
                 Err(e) => {
-                    let _ = msg.reply_ping(&ctx.http, format!("{e}"));
+                    let _ = msg.reply_ping(&ctx.http, format!("{e}")).await;
                 }
             }
 

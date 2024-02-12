@@ -1,5 +1,3 @@
-use dotenvy;
-
 use crate::database::Database;
 
 mod util;
@@ -18,7 +16,7 @@ async fn main() {
     
     
     let _client = check_res!(
-        discord::DiscordClient::new(&mut db, &mut cfg).await
+        discord::DiscordClient::new(&mut db, &cfg).await
     );
     
 }

@@ -45,7 +45,7 @@ pub fn register_commands(){
     ];
 }
 
-pub async fn command_handler(cfg: &Config, commands: &Box<Vec<CommandInfo>>, ctx: &Context, msg: &Message, args: Vec<String>) -> Result<()> {
+pub async fn command_handler(cfg: &Config, commands: &[CommandInfo], ctx: &Context, msg: &Message, args: Vec<String>) -> Result<()> {
 
     
     check_perms(cfg, commands, ctx, msg, args[0].as_str()).await;
@@ -64,9 +64,9 @@ pub async fn command_handler(cfg: &Config, commands: &Box<Vec<CommandInfo>>, ctx
     Ok(())
 }
 
-async fn check_perms(cfg: &Config, commands: &Box<Vec<CommandInfo>>, ctx: &Context, msg: &Message, cmd: &str) -> bool {
+async fn check_perms(cfg: &Config, commands: &[CommandInfo], ctx: &Context, msg: &Message, cmd: &str) -> bool {
 
-    let Some(cmd) = commands.iter().find(|c| c.name == cmd.to_string()) else {return false};
+    let Some(cmd) = commands.iter().find(|c| c.name == cmd) else {return false};
     let perms = &cmd.permissions;
 
     let perm_names = perms.iter_names().map(|f| f.0.to_string()).collect::<Vec<String>>().join(" ");
