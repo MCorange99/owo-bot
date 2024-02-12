@@ -1,10 +1,8 @@
 use serenity::all::*;
-use crate::discord::features;
-
 use super::Handler;
 
 impl Handler {
-    pub async fn message_create(&self, ctx: Context, msg: Message) {
+    pub async fn message_create(&self, ctx: Context, msg: &Message) {
         if msg.is_own(&ctx.cache) {
             return; // Dont respond to own messages
         }
@@ -37,8 +35,5 @@ impl Handler {
             }
 
         }
-
-        features::autoresponder::autoreply(&self.config, &ctx, &msg).await;
-        features::autoresponder::autoreact(&self.config, &ctx, &msg).await;
     }
 }

@@ -40,3 +40,16 @@ macro_rules! check_res {
         }
     };
 }
+
+
+#[macro_export]
+macro_rules! log_if_err {
+    ($e:expr) => {
+        match $e {
+            Ok(_) => (),
+            Err(e) => {
+                log::warn!("Had error: {e}");
+            }
+        }
+    };
+}

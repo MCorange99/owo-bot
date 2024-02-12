@@ -2,13 +2,14 @@ mod ready;
 mod message;
 
 use serenity::all::*;
-use crate::util::config::Config;
+use crate::{log_if_err, util::config::Config};
 
-use super::commands::CommandInfo;
+use super::{commands::CommandInfo, features::{autoresponder::Autoresponder, Feature, FeatureWraper}};
 
 pub struct Handler {
     pub commands: Box<Vec<CommandInfo>>,
-    pub config: Config
+    pub config: Config,
+    pub autoresponder: FeatureWraper<Autoresponder>
 }
 
 
@@ -16,7 +17,8 @@ impl Handler {
     pub fn new(config: &Config) -> Self {
         Self {
             commands: Box::new(Vec::new()),
-            config: config.clone()
+            config: config.clone(),
+            autoresponder: FeatureWraper::new(Autoresponder::default()),
         }
     }
 }
@@ -88,9 +90,16 @@ impl RawEventHandler for Handler {
             Event::GuildScheduledEventUserRemove(_) => (),
             
             Event::MessageCreate(e) => {
-                self.message_create(ctx, e.message).await;
+                {
+                    log_if_err!(self.autoresponder.lock().await.run(&self.config, &ctx, &e.message).await);
+                }
+
+                self.message_create(ctx, &e.message).await;
             }
             Event::Ready(e) => {
+                {
+                    log_if_err!(self.autoresponder.lock().await.init(&self.config, &ctx, None).await);
+                }
                 self.ready(ctx, e.ready).await;
             }
             Event::Unknown(e)  => log::debug!("Unknown event: {:?} {:?}", e.kind, e.value),
