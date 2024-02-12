@@ -12,7 +12,7 @@ pub struct ConfigAutoreply {
     pub trigger: Option<String>,
     pub trigger_rx: Option<String>,
     pub response: String,
-    pub force_lowercase: Option<bool>
+    pub keep_case: Option<bool>
 }
 
 #[derive(Deserialize, Clone, Default)]
@@ -22,7 +22,7 @@ pub struct ConfigAutoreact {
     pub name: Option<String>,
     pub id: String,
     pub animated: bool,
-    pub force_lowercase: Option<bool>,
+    pub keep_case: Option<bool>,
 }
 
 impl ConfigAutoreact {
